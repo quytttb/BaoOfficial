@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/resourcesFragment"
+        android:icon="@drawable/ic_baseline_source_24"
+        android:title="@string/title_resources" />
+
+    <item
+        android:id="@+id/informationFragment"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="@string/title_information" />
+
+</menu>

@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Bao Official</string>
+    <string name="title_home">Home</string>
+    <string name="title_resources">Resources</string>
+    <string name="title_information">Information</string>
+
+
+    <string name="action_raw_parser">Parse raw data from URL</string>
+    <string name="alert_raw_parser_title">Add an RSS feed url</string>
+    <string name="alert_raw_parser_positive">OK</string>
+    <string name="alert_raw_parser_negative">Cancel</string>
+
+
+    <string name="alert_title">Attention!</string>
+    <string name="alert_message">Unable to load data. \nCheck your connection!</string>
+    <string name="alert_positive">OK</string>
+    <string name="alert_negative">Cancel</string>
+    <string name="video">Video</string>
+    <string name="text_to_speech">Text to speech</string>
+    <string name="about_us">ABOUT US</string>
+    <string name="close_app">CLOSE APP</string>
+    <string name="share_app">SHARE APP</string>
+
+</resources>

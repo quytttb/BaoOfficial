@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.prof.rssparser.example.MainActivity">
+    <item
+        android:id="@+id/action_text_to_speech"
+        android:title="@string/action_raw_parser"
+        android:icon="@drawable/ic_outline_text_to_speech"
+        app:showAsAction="ifRoom"/>
+</menu>

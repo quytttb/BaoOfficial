@@ -26,7 +26,7 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.goodteam.baoofficial.ui.resources.ResourcesFragmentDirections
+import com.goodteam.baoofficial.ui.resources.list.ListFragmentDirections
 import com.prof.rssparser.Article
 import java.text.SimpleDateFormat
 import java.util.*
@@ -91,11 +91,11 @@ class ArticleAdapter(private var articles: List<Article>) :
             }
 
             categoriesText.text = categories
-            val content= article.content.toString()
+            val content= article.link.toString()
             //val link= article.link.toString()
             itemView.setOnClickListener {
                 //show article content inside a dialog
-                itemView.findNavController().navigate(ResourcesFragmentDirections.actionNavigationResourcesToDetailFragment(content))
+                itemView.findNavController().navigate(ListFragmentDirections.actionListFragmentToDetailFragment(content))
         }
         }
     }

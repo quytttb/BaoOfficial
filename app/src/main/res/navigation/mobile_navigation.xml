@@ -12,16 +12,6 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/resourcesFragment"
-        android:name="com.goodteam.baoofficial.ui.resources.list.ListFragment"
-        android:label="@string/title_resources"
-        tools:layout="@layout/fragment_resources" >
-        <action
-            android:id="@+id/action_navigation_resources_to_detailFragment"
-            app:destination="@id/detailFragment" />
-    </fragment>
-
-    <fragment
         android:id="@+id/informationFragment"
         android:name="com.goodteam.baoofficial.ui.information.InformationFragment"
         android:label="@string/title_information"
@@ -34,5 +24,25 @@
         <argument
             android:name="content"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.goodteam.baoofficial.ui.resources.list.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/resourcesFragment"
+        android:name="com.goodteam.baoofficial.ui.resources.ResourcesFragment"
+        android:label="ResourcesFragment" >
+        <action
+            android:id="@+id/action_resourcesFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
 </navigation>

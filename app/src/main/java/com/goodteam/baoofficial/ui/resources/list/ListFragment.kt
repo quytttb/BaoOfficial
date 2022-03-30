@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.goodteam.baoofficial.ArticleAdapter
 import com.goodteam.baoofficial.R
-import com.goodteam.baoofficial.databinding.FragmentResourcesBinding
+import com.goodteam.baoofficial.databinding.FragmentListBinding
 import com.goodteam.baoofficial.util.AlertDialogHelper
 import com.google.android.material.snackbar.Snackbar
 import com.prof.rssparser.Parser
@@ -24,14 +24,22 @@ import com.prof.rssparser.Parser
 class ListFragment : Fragment() {
     private lateinit var adapter: ArticleAdapter
     private lateinit var parser: Parser
+    private lateinit var url: String
 
 
-    private var _binding: FragmentResourcesBinding? = null
+    private var _binding: FragmentListBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
     private val listViewModel: ListViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            url = it.getString("url").toString()
+        }
+    }
 
 
     @SuppressLint("NotifyDataSetChanged")
@@ -41,7 +49,7 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentResourcesBinding.inflate(inflater, container, false)
+        _binding = FragmentListBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -81,7 +89,7 @@ class ListFragment : Fragment() {
         binding.swipeLayout.setOnRefreshListener {
             adapter.clearArticles()
             binding.swipeLayout.isRefreshing = true
-            listViewModel.fetchFeed(parser)
+            listViewModel.fetchFeed(parser, url)
         }
 
         if (!isOnline(requireContext())) {
@@ -95,8 +103,7 @@ class ListFragment : Fragment() {
             val alert = builder.create()
             alert.show()
         } else if (isOnline(requireContext()))
-        listViewModel.fetchFeed(parser)
-
+            listViewModel.fetchFeed(parser, url)
 
 
     }
@@ -111,8 +118,8 @@ class ListFragment : Fragment() {
                 title = R.string.alert_raw_parser_title,
                 positiveButton = R.string.alert_raw_parser_positive,
                 negativeButton = R.string.alert_raw_parser_negative
-            ).buildInputDialog(requireContext()) { url ->
-                listViewModel.fetchForUrlAndParseRawData(url)
+            ).buildInputDialog(requireContext()) { urlInput ->
+                listViewModel.fetchForUrlAndParseRawData(urlInput)
             }.show()
         }
 

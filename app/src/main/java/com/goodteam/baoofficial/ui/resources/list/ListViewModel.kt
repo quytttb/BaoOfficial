@@ -14,8 +14,6 @@ import okhttp3.Request
 
 class ListViewModel : ViewModel() {
 
-    private val url = "https://vatvostudio.vn/feed/"
-    private val url2 = "https://www.androidauthority.com/feed"
     private lateinit var articleListLive: MutableLiveData<Channel>
 
     private val _snackbar = MutableLiveData<String>()
@@ -35,7 +33,7 @@ class ListViewModel : ViewModel() {
         _snackbar.value = null
     }
 
-    fun fetchFeed(parser: Parser) {
+    fun fetchFeed(parser: Parser, url: String) {
         viewModelScope.launch {
             try {
                 val channel = parser.getChannel(url)
@@ -48,12 +46,12 @@ class ListViewModel : ViewModel() {
         }
     }
 
-    fun fetchForUrlAndParseRawData(url: String) {
+    fun fetchForUrlAndParseRawData(urlInput: String) {
         val parser = Parser.Builder().build()
 
         viewModelScope.launch(Dispatchers.IO) {
             val request = Request.Builder()
-                .url(url)
+                .url(urlInput)
                 .build()
             val result = okHttpClient.newCall(request).execute()
             val raw = runCatching { result.body()?.string() }.getOrNull()
@@ -65,4 +63,5 @@ class ListViewModel : ViewModel() {
             }
         }
     }
+
 }

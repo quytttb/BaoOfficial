@@ -46,9 +46,7 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.title = "CHI TIẾT"
 
-
-
-
+/*
         binding.webview.loadDataWithBaseURL(
             null,
             "<style>img{display: inline; height: auto; max-width: 100%;}</style>\n" +
@@ -57,7 +55,10 @@ class DetailFragment : Fragment() {
             null,
             "utf-8",
             null)
-        binding.webview.settings.javaScriptEnabled = true
+*/
+        binding.webview.loadUrl(content)
+
+            binding.webview.settings.javaScriptEnabled = true
         binding.webview.webViewClient = WebViewClient()
 
         mTTS = TextToSpeech(requireContext()) { i ->
@@ -67,33 +68,6 @@ class DetailFragment : Fragment() {
             }
         }
 
-/*                val articleView = WebView(itemView.context)
-                articleView.settings.loadWithOverviewMode = true
-                articleView.settings.javaScriptEnabled = true
-                articleView.isHorizontalScrollBarEnabled = false
-                articleView.webChromeClient = WebChromeClient()
-                articleView.loadDataWithBaseURL(
-                    null,
-                    "<style>img{display: inline; height: auto; max-width: 100%;} " +
-
-                            "</style>\n" + "<style>iframe{ height: auto; width: auto;}" + "</style>\n" + article.content,
-                    null,
-                    "utf-8",
-                    null
-                )
-
-                val alertDialog =
-                    androidx.appcompat.app.AlertDialog.Builder(itemView.context).create()
-                alertDialog.setTitle(article.title)
-                alertDialog.setView(articleView)
-                alertDialog.setButton(
-                    androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL, "OK"
-                ) { dialog, _ -> dialog.dismiss() }
-                alertDialog.show()
-
-                (alertDialog.findViewById<View>(android.R.id.message) as TextView).movementMethod =
-                    LinkMovementMethod.getInstance()
-*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -104,7 +78,9 @@ class DetailFragment : Fragment() {
         if (item.itemId == R.id.action_text_to_speech) {
             textToSpeech()
         }
-
+        else {
+            mTTS.stop()
+        }
         return super.onOptionsItemSelected(item)
     }
 

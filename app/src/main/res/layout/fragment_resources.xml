@@ -38,6 +38,7 @@
                         android:layout_width="170dp"
                         android:layout_height="170dp"
                         android:layout_weight="1"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/vatvo_logo" />
                 </androidx.cardview.widget.CardView>
 
@@ -52,6 +53,7 @@
                         android:layout_width="170dp"
                         android:layout_height="170dp"
                         android:layout_weight="1"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/genk_logo" />
                 </androidx.cardview.widget.CardView>
 
@@ -71,12 +73,13 @@
                     app:cardCornerRadius="20dp">
 
                     <ImageView
-                        android:id="@+id/ivTinhTe"
+                        android:id="@+id/ivVNExpress"
                         android:layout_width="170dp"
                         android:layout_height="170dp"
                         android:layout_weight="1"
                         android:background="@color/white"
-                        app:srcCompat="@drawable/tinhte_logo" />
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/logo_vnexpress" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -86,12 +89,13 @@
                     app:cardCornerRadius="20dp">
 
                     <ImageView
-                        android:id="@+id/ivTeachRoom"
+                        android:id="@+id/ivTuoiTre"
                         android:layout_width="170dp"
                         android:layout_height="170dp"
                         android:layout_weight="1"
                         android:background="@color/white"
-                        app:srcCompat="@drawable/teachroom_logo" />
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/logo_tuoi_tre" />
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
@@ -111,11 +115,12 @@
                     app:cardCornerRadius="20dp">
 
                     <ImageView
-                        android:id="@+id/ivTechMac"
+                        android:id="@+id/ivAndroidAuthority"
                         android:layout_width="170dp"
                         android:layout_height="170dp"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/techmag_logo" />
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/logo_anroid_authority" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -125,11 +130,11 @@
                     app:cardCornerRadius="20dp">
 
                     <ImageView
-                        android:id="@+id/ivTeachZ"
+                        android:id="@+id/ivNewYorkTimes"
                         android:layout_width="170dp"
                         android:layout_height="170dp"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/techz_logo" />
+                        app:srcCompat="@drawable/logo_new_york_times" />
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>

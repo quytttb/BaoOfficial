@@ -1,14 +1,10 @@
-package com.goodteam.baoofficial.ui.resources.list
+package com.goodteam.baoofficial.ui.resources.list_detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.prof.rssparser.Parser
 import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import java.io.IOException
 
 class DetailViewModel  : ViewModel() {
      var result=""

@@ -1,4 +1,4 @@
-package com.goodteam.baoofficial.ui.resources.list
+package com.goodteam.baoofficial.ui.resources.list_detail
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData

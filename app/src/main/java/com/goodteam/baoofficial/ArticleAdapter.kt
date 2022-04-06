@@ -26,7 +26,7 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.goodteam.baoofficial.ui.resources.list.ListFragmentDirections
+import com.goodteam.baoofficial.ui.resources.list_detail.ListFragmentDirections
 import com.prof.rssparser.Article
 import java.text.SimpleDateFormat
 import java.util.*

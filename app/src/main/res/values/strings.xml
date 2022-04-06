@@ -20,5 +20,7 @@
     <string name="about_us">ABOUT US</string>
     <string name="close_app">CLOSE APP</string>
     <string name="share_app">SHARE APP</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

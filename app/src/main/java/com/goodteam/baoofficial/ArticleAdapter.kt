@@ -91,11 +91,11 @@ class ArticleAdapter(private var articles: List<Article>) :
             }
 
             categoriesText.text = categories
-            val content= article.link.toString()
-            //val link= article.link.toString()
+            val content = article.content.toString()
+            val link = article.link.toString()
             itemView.setOnClickListener {
                 //show article content inside a dialog
-                itemView.findNavController().navigate(ListFragmentDirections.actionListFragmentToDetailFragment(content))
+                itemView.findNavController().navigate(ListFragmentDirections.actionListFragmentToDetailFragment(content, link))
         }
         }
     }

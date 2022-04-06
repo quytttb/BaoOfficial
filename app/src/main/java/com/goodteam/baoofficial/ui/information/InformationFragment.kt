@@ -1,5 +1,6 @@
 package com.goodteam.baoofficial.ui.information
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.goodteam.baoofficial.databinding.FragmentInformationBinding
+import com.goodteam.baoofficial.ui.resources.ResourcesFragmentDirections
 import kotlin.system.exitProcess
 
 class InformationFragment : Fragment() {
@@ -29,12 +32,6 @@ class InformationFragment : Fragment() {
 
         _binding = FragmentInformationBinding.inflate(inflater, container, false)
 
-/*
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-*/
         return binding.root
     }
 
@@ -55,6 +52,23 @@ class InformationFragment : Fragment() {
             builder.show()
 
         }
+
+        binding.tvAboutUs.setOnClickListener {
+            this.findNavController().navigate(InformationFragmentDirections.actionInformationFragmentToAboutUsFragment())
+        }
+
+        binding.tvShareApp.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            val body = "Dowmload now"
+            val sub =
+                "https://drive.google.com/drive/folders/1JTEeqppldJro61gQYQnxud8fparxtTv1?usp=sharing"
+            intent.putExtra(Intent.EXTRA_TEXT, body)
+            intent.putExtra(Intent.EXTRA_TEXT, sub)
+            val shareIntent = Intent.createChooser(intent, null)
+            startActivity(shareIntent)
+        }
+
     }
 
     override fun onDestroyView() {

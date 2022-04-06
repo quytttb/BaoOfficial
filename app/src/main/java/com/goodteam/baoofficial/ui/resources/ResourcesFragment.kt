@@ -1,20 +1,18 @@
 package com.goodteam.baoofficial.ui.resources
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.goodteam.baoofficial.ArticleAdapter
 import com.goodteam.baoofficial.databinding.FragmentResourcesBinding
-import com.goodteam.baoofficial.ui.resources.list.ListFragmentDirections
 import com.prof.rssparser.Parser
-import androidx.navigation.fragment.findNavController
 
 
 class ResourcesFragment : Fragment() {
-    private lateinit var adapter: ArticleAdapter
-    private lateinit var parser: Parser
-
-
     private var _binding: FragmentResourcesBinding? = null
 
     // This property is only valid between onCreateView and
@@ -42,6 +40,7 @@ class ResourcesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = "Resources"
 
         binding.ivVatVo.setOnClickListener {
             selectResource(0)

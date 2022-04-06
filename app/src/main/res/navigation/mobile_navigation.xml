@@ -15,7 +15,11 @@
         android:id="@+id/informationFragment"
         android:name="com.goodteam.baoofficial.ui.information.InformationFragment"
         android:label="@string/title_information"
-        tools:layout="@layout/fragment_information" />
+        tools:layout="@layout/fragment_information" >
+        <action
+            android:id="@+id/action_informationFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.goodteam.baoofficial.ui.resources.list.DetailFragment"
@@ -23,6 +27,9 @@
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="content"
+            app:argType="string" />
+        <argument
+            android:name="link"
             app:argType="string" />
     </fragment>
     <fragment
@@ -45,4 +52,9 @@
             android:id="@+id/action_resourcesFragment_to_listFragment"
             app:destination="@id/listFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.goodteam.baoofficial.ui.information.aboutUs.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
 </navigation>

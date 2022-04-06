@@ -8,6 +8,7 @@ import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.goodteam.baoofficial.R
 import com.goodteam.baoofficial.databinding.FragmentDetailBinding
 import java.util.*
@@ -15,11 +16,14 @@ import java.util.*
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
+    private val detailViewModel: DetailViewModel by viewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var content: String
+    private var freshContent: String? = null
+    private lateinit var link: String
     private lateinit var mTTS: TextToSpeech
 
 
@@ -28,6 +32,7 @@ class DetailFragment : Fragment() {
 
         arguments?.let {
             content = it.getString("content").toString()
+            link = it.getString("link").toString()
         }
     }
 
@@ -44,29 +49,31 @@ class DetailFragment : Fragment() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = "CHI TIẾT"
+        (activity as AppCompatActivity).supportActionBar?.title = "Detail"
 
-/*
-        binding.webview.loadDataWithBaseURL(
-            null,
+        if(content == "null")
+            binding.webview.loadUrl(link)
+        else
+            binding.webview.loadDataWithBaseURL(
+            link,
             "<style>img{display: inline; height: auto; max-width: 100%;}</style>\n" +
                     "<style>iframe{ max-height: 100%; max-width: 100%;}</style>\n" +
                     content,
             null,
             "utf-8",
             null)
-*/
-        binding.webview.loadUrl(content)
 
-            binding.webview.settings.javaScriptEnabled = true
+
+        binding.webview.settings.javaScriptEnabled = true
         binding.webview.webViewClient = WebViewClient()
 
         mTTS = TextToSpeech(requireContext()) { i ->
-            Toast.makeText(requireContext(), R.string.text_to_speech + i, Toast.LENGTH_SHORT).show()
             if (i == TextToSpeech.SUCCESS) {
                 mTTS.language = Locale.forLanguageTag("vi-VN")
             }
         }
+
+        freshContent= detailViewModel.getString(content, link)
 
     }
 
@@ -76,10 +83,8 @@ class DetailFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_text_to_speech) {
+            Toast.makeText(requireContext(), R.string.text_to_speech, Toast.LENGTH_SHORT).show()
             textToSpeech()
-        }
-        else {
-            mTTS.stop()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -96,3 +101,4 @@ class DetailFragment : Fragment() {
     }
 
 }
+

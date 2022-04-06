@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="20dp"
     android:background="@drawable/bg_4"
-    tools:context=".ui.resources.list.ListFragment">
+    tools:context=".ui.resources.list_detail.ListFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

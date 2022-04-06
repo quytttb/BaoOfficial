@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.goodteam.baoofficial.ui.resources.list.DetailFragment"
+        android:name="com.goodteam.baoofficial.ui.resources.list_detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.goodteam.baoofficial.ui.resources.list.ListFragment"
+        android:name="com.goodteam.baoofficial.ui.resources.list_detail.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
         <action

@@ -25,7 +25,8 @@ class ResourcesFragment : Fragment() {
         "https://vnexpress.net/rss/tin-moi-nhat.rss",
         "https://tuoitre.vn/rss/tin-moi-nhat.rss",
         "https://www.androidauthority.com/feed",
-        "https://rss.nytimes.com/services/xml/rss/nyt/World.xml")
+        "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
+    )
 
 
     override fun onCreateView(
@@ -64,7 +65,8 @@ class ResourcesFragment : Fragment() {
 
     private fun selectResource(index: Int) {
         url = urlResources[index]
-        this.findNavController().navigate(ResourcesFragmentDirections.actionResourcesFragmentToListFragment(url))
+        this.findNavController()
+            .navigate(ResourcesFragmentDirections.actionResourcesFragmentToListFragment(url))
     }
 
     override fun onDestroyView() {

@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.012" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtName"
         android:layout_width="306dp"
         android:layout_height="83dp"
         android:fontFamily="sans-serif-medium"
@@ -46,20 +46,19 @@
         app:layout_constraintGuide_begin="77dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtTemperature"
         android:layout_width="303dp"
         android:layout_height="173dp"
-        android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-light"
         android:text="42 C"
         android:textSize="80sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.032"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imgIcon" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txtMinMax"
         android:layout_width="299dp"
         android:layout_height="50dp"
         android:layout_marginTop="4dp"
@@ -69,6 +68,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTemperature" />
+
+    <ImageView
+        android:id="@+id/imgIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_info_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.003"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

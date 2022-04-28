@@ -23,17 +23,18 @@ class AboutUsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val notificationsViewModel =
+        val aboutUsViewModel =
             ViewModelProvider(this)[AboutUsViewModel::class.java]
 
         _binding = FragmentAboutUsBinding.inflate(inflater, container, false)
 
-        val textView: TextView = binding.textView
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.txtInformation
+        aboutUsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return binding.root
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

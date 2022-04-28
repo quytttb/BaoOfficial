@@ -1,28 +1,14 @@
-/*
- *   Copyright 2016 Marco Gomiero
- *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
- *
- */
-
 package com.goodteam.baoofficial
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -31,20 +17,73 @@ import com.prof.rssparser.Article
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ArticleAdapter(private var articles: List<Article>) :
+class ArticleAdapter(private var articles: MutableList<Article>) :
     RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row, parent, false))
 
     override fun getItemCount() = articles.size
 
+    var countClicks = mutableListOf<Int>()
+
+
+    @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(articles[position])
+
+        //set onLongClickListener
+        holder.itemView.setOnLongClickListener {
+            //delete this article
+/*
+            val builder = AlertDialog.Builder(holder.itemView.context)
+            builder.setTitle("Delete article")
+            builder.setMessage("Are you sure you want to delete this article?")
+            builder.setPositiveButton("Yes") { _, _ ->
+                //delete this article
+                articles.removeAt(position)
+                notifyDataSetChanged()
+            }
+            builder.setNegativeButton("No") { dialog, _ ->
+                //cancel the dialog
+                dialog.dismiss()
+
+            }
+            builder.show()
+*/
+            true
+        }
+
+        //set onClickListener
+        val content = articles[position].content.toString()
+        val link = articles[position].link.toString()
+
+
+        countClicks[position] = 0
+        //set onClickListener
+        holder.itemView.setOnClickListener {
+            //open article in detail fragment
+            holder.itemView.findNavController().navigate(
+                ListFragmentDirections.actionListFragmentToDetailFragment(
+                    content,
+                    link
+                )
+            )
+            //count the number of times read article
+            //if the article is clicked, add 1 countClicks
+            countClicks[position]++
+            //toast the number of times read article
+            Toast.makeText(
+                holder.itemView.context,
+                "You have read this article ${countClicks[position]} times",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
     fun clearArticles() {
-        articles = emptyList()
+        articles = mutableListOf()
         notifyDataSetChanged()
     }
 
@@ -91,12 +130,6 @@ class ArticleAdapter(private var articles: List<Article>) :
             }
 
             categoriesText.text = categories
-            val content = article.content.toString()
-            val link = article.link.toString()
-            itemView.setOnClickListener {
-                //show article content inside a dialog
-                itemView.findNavController().navigate(ListFragmentDirections.actionListFragmentToDetailFragment(content, link))
-        }
         }
     }
 }

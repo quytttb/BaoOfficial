@@ -19,6 +19,7 @@ import com.goodteam.baoofficial.R
 import com.goodteam.baoofficial.databinding.FragmentListBinding
 import com.goodteam.baoofficial.util.AlertDialogHelper
 import com.google.android.material.snackbar.Snackbar
+import com.prof.rssparser.Article
 import com.prof.rssparser.Parser
 
 
@@ -69,7 +70,7 @@ class ListFragment : Fragment() {
 
         listViewModel.rssChannel.observe(viewLifecycleOwner) { channel ->
             if (channel != null) {
-                adapter = ArticleAdapter(channel.articles)
+                adapter = ArticleAdapter(channel.articles as MutableList<Article>)
                 binding.recyclerView.adapter = adapter
                 adapter.notifyDataSetChanged()
                 binding.progressBar.visibility = View.GONE
@@ -98,7 +99,8 @@ class ListFragment : Fragment() {
             builder.setMessage(R.string.alert_message)
                 .setTitle(R.string.alert_title)
                 .setCancelable(false)
-                .setPositiveButton(R.string.alert_positive
+                .setPositiveButton(
+                    R.string.alert_positive
                 ) { _, _ -> onDestroyView() }
 
             val alert = builder.create()
@@ -109,7 +111,7 @@ class ListFragment : Fragment() {
 
     }
 
-        override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
     }
 
@@ -129,7 +131,8 @@ class ListFragment : Fragment() {
 
     @Suppress("DEPRECATION")
     fun isOnline(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val network = connectivityManager.activeNetwork ?: return false
             val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false

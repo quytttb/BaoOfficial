@@ -27,7 +27,7 @@ class InformationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
+        val informationViewModel =
             ViewModelProvider(this)[InformationViewModel::class.java]
 
         _binding = FragmentInformationBinding.inflate(inflater, container, false)
@@ -54,15 +54,16 @@ class InformationFragment : Fragment() {
         }
 
         binding.tvAboutUs.setOnClickListener {
-            this.findNavController().navigate(InformationFragmentDirections.actionInformationFragmentToAboutUsFragment())
+            this.findNavController()
+                .navigate(InformationFragmentDirections.actionInformationFragmentToAboutUsFragment())
         }
 
         binding.tvShareApp.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
-            val body = "Dowmload now"
+            val body = "Source code of this app is available at: "
             val sub =
-                "https://drive.google.com/drive/folders/1JTEeqppldJro61gQYQnxud8fparxtTv1?usp=sharing"
+                "https://github.com/quytttb/BaoOfficial"
             intent.putExtra(Intent.EXTRA_TEXT, body)
             intent.putExtra(Intent.EXTRA_TEXT, sub)
             val shareIntent = Intent.createChooser(intent, null)

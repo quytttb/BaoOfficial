@@ -6,8 +6,8 @@ import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
-class DetailViewModel  : ViewModel() {
-     var result=""
+class DetailViewModel : ViewModel() {
+    var result = ""
 
     fun getString(content: String, link: String): String {
         viewModelScope.launch {

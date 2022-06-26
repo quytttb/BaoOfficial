@@ -1,5 +1,5 @@
 <div align="center">
-    <img width="200" height="200" style="display: block; border: 1px solid #f5f5f5; border-radius: 9999px;" src="./app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml">
+    <img width="200" height="200" style="display: block; border: 1px solid #f5f5f5; border-radius: 9999px;" src=".app/src/main/res/mipmap-xxxhdpi/ic_launcher.png">
 </div>
 
 <br>

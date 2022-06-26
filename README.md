@@ -27,11 +27,11 @@
     <a target="_blank" href="https://github.com/Ashinch/ReadYou/blob/main/README-zh.md">简体中文</a></p>
     <br/>
     <br/>
-    <img src="https://photos.google.com/photo/AF1QipMSI8_TH1RDomCfqzfl29aJ2soeBWf0vhXIK2C2" width="19.2%" alt="startup" />
-    <img src="./fastlane/metadata/android/en-US/images/feeds.png" width="19.2%" alt="startup" />
-    <img src="./fastlane/metadata/android/en-US/images/flow.png" width="19.2%" alt="startup" />
-    <img src="./fastlane/metadata/android/en-US/images/read.png" width="19.2%" alt="startup" />
-    <img src="./fastlane/metadata/android/en-US/images/settings.png" width="19.2%" alt="startup" />
+    <img src="./app/src/main/res/screenshots/home.png" width="19.2%" alt="home" />
+    <img src="./app/src/main/res/screenshots/resources.png" width="19.2%" alt="resources" />
+    <img src="./app/src/main/res/screenshots/list.png" width="19.2%" alt="list" />
+    <img src="./app/src/main/res/screenshots/detail.png" width="19.2%" alt="detail" />
+    <img src="./app/src/main/res/screenshots/information.png" width="19.2%" alt="information" />
     <br/>
     <br/>
 </div>

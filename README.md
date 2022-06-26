@@ -27,7 +27,7 @@
     <a target="_blank" href="https://github.com/Ashinch/ReadYou/blob/main/README-zh.md">简体中文</a></p>
     <br/>
     <br/>
-    <img src="./fastlane/metadata/android/en-US/images/startup.png" width="19.2%" alt="startup" />
+    <img src="https://photos.google.com/photo/AF1QipMSI8_TH1RDomCfqzfl29aJ2soeBWf0vhXIK2C2" width="19.2%" alt="startup" />
     <img src="./fastlane/metadata/android/en-US/images/feeds.png" width="19.2%" alt="startup" />
     <img src="./fastlane/metadata/android/en-US/images/flow.png" width="19.2%" alt="startup" />
     <img src="./fastlane/metadata/android/en-US/images/read.png" width="19.2%" alt="startup" />

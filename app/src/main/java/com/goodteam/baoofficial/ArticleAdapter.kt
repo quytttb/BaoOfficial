@@ -1,9 +1,12 @@
 package com.goodteam.baoofficial
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -14,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.goodteam.baoofficial.ui.resources.list_detail.ListFragmentDirections
 import com.prof.rssparser.Article
+import kotlinx.coroutines.NonDisposableHandle.parent
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,23 +28,31 @@ class ArticleAdapter(private var articles: MutableList<Article>) :
 
     override fun getItemCount() = articles.size
 
-    var countClicks = mutableListOf<Int>()
+    private val countClicks = mutableListOf<Int>()
+
+    //init countClicks
+    init {
+        for (i in 0 until articles.size) {
+            countClicks.add(0)
+        }
+    }
 
 
-    @SuppressLint("NotifyDataSetChanged")
+
+    @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(articles[position])
 
         //set onLongClickListener
         holder.itemView.setOnLongClickListener {
-            //delete this article
-/*
+            //add to favourite
             val builder = AlertDialog.Builder(holder.itemView.context)
-            builder.setTitle("Delete article")
+            builder.setTitle("Add to favourite?")
             builder.setMessage("Are you sure you want to delete this article?")
             builder.setPositiveButton("Yes") { _, _ ->
-                //delete this article
-                articles.removeAt(position)
+                //visible favourite icon
+                holder.favouriteIcon.visibility = View.VISIBLE
+
                 notifyDataSetChanged()
             }
             builder.setNegativeButton("No") { dialog, _ ->
@@ -49,7 +61,6 @@ class ArticleAdapter(private var articles: MutableList<Article>) :
 
             }
             builder.show()
-*/
             true
         }
 
@@ -57,10 +68,21 @@ class ArticleAdapter(private var articles: MutableList<Article>) :
         val content = articles[position].content.toString()
         val link = articles[position].link.toString()
 
-
-        countClicks[position] = 0
         //set onClickListener
         holder.itemView.setOnClickListener {
+            //count the number of times read article
+            //if the article is clicked, add 1 countClicks
+            //countClicks[position]=countClicks[position]+1
+            //toast the number of times read article
+
+/*
+            Toast.makeText(
+                holder.itemView.context,
+                "You have read this article ${countClicks[position]} times",
+                Toast.LENGTH_SHORT
+            ).show()
+*/
+
             //open article in detail fragment
             holder.itemView.findNavController().navigate(
                 ListFragmentDirections.actionListFragmentToDetailFragment(
@@ -68,15 +90,6 @@ class ArticleAdapter(private var articles: MutableList<Article>) :
                     link
                 )
             )
-            //count the number of times read article
-            //if the article is clicked, add 1 countClicks
-            countClicks[position]++
-            //toast the number of times read article
-            Toast.makeText(
-                holder.itemView.context,
-                "You have read this article ${countClicks[position]} times",
-                Toast.LENGTH_SHORT
-            ).show()
         }
 
     }
@@ -87,14 +100,45 @@ class ArticleAdapter(private var articles: MutableList<Article>) :
         notifyDataSetChanged()
     }
 
+    //searching for articles
+    @SuppressLint("NotifyDataSetChanged")
+    fun searchArticles(query: String) {
+        val newArticles = mutableListOf<Article>()
+        val oldArticle = articles
+        for (article in articles) {
+            if (article.title?.lowercase(Locale.getDefault())!!.contains(query.lowercase(Locale.getDefault()))) {
+                newArticles.add(article)
+            }
+        }
+        articles = newArticles
+
+        notifyDataSetChanged()
+        //if the query is empty, show all articles
+/*
+        if (query.isEmpty()) {
+            articles = oldArticle
+            notifyDataSetChanged()
+        }
+*/
+    }
+
+    //sort articles by alphabet
+    @SuppressLint("NotifyDataSetChanged")
+    fun sortArticles() {
+        articles.sortBy { it.title }
+        notifyDataSetChanged()
+    }
+
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val title = itemView.findViewById<TextView>(R.id.title)
         private val pubDate = itemView.findViewById<TextView>(R.id.pubDate)
         private val categoriesText = itemView.findViewById<TextView>(R.id.categories)
         private val image = itemView.findViewById<ImageView>(R.id.image)
+        val favouriteIcon = itemView.findViewById<ImageView>(R.id.imgFav)
 
-        @SuppressLint("SetJavaScriptEnabled")
+                @SuppressLint("SetJavaScriptEnabled")
         fun bind(article: Article) {
 
             var pubDateString = article.pubDate

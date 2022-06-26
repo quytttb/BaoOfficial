@@ -15,7 +15,6 @@ import okhttp3.Request
 class ListViewModel : ViewModel() {
 
     private lateinit var articleListLive: MutableLiveData<Channel>
-
     private val _snackbar = MutableLiveData<String>()
     val snackbar: LiveData<String>
         get() = _snackbar

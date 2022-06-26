@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.prof.rssparser.example.MainActivity">
     <item
-        android:id="@+id/action_raw_parser"
-        android:title="@string/action_raw_parser"
-        android:icon="@drawable/ic_baseline_rss_feed_24"
-        app:showAsAction="ifRoom"/>
+        android:id="@+id/nav_search"
+        android:title="@string/search_article"
+        android:icon="@drawable/ic_baseline_search_24"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="ifRoom|withText"/>
 </menu>

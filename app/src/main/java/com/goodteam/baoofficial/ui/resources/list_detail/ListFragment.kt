@@ -9,6 +9,8 @@ import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,7 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.goodteam.baoofficial.ArticleAdapter
 import com.goodteam.baoofficial.R
 import com.goodteam.baoofficial.databinding.FragmentListBinding
-import com.goodteam.baoofficial.util.AlertDialogHelper
 import com.google.android.material.snackbar.Snackbar
 import com.prof.rssparser.Article
 import com.prof.rssparser.Parser
@@ -60,6 +61,8 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.title = "List"
+        //back button
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         parser = Parser.Builder()
             .cacheExpirationMillis(24L * 60L * 60L * 100L) // one day
             .build()
@@ -113,21 +116,27 @@ class ListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
+        val search: MenuItem? = menu.findItem(R.id.nav_search)
+        val searchView: SearchView? = search?.actionView as SearchView?
+        searchView?.queryHint = "Search article"
+
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    adapter.searchArticles(newText)
+                }
+
+
+                return false
+            }
+        })
+        return super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_raw_parser) {
-            AlertDialogHelper(
-                title = R.string.alert_raw_parser_title,
-                positiveButton = R.string.alert_raw_parser_positive,
-                negativeButton = R.string.alert_raw_parser_negative
-            ).buildInputDialog(requireContext()) { urlInput ->
-                listViewModel.fetchForUrlAndParseRawData(urlInput)
-            }.show()
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
 
     @Suppress("DEPRECATION")
     fun isOnline(context: Context): Boolean {
